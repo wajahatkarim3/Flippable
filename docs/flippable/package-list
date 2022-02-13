@@ -1,0 +1,9 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:com.wajahatkarim.flippable////PointingToDeclaration/flippable/com.wajahatkarim.flippable/index.html
+$dokka.location:com.wajahatkarim.flippable//FlipView/#kotlin.Function0[kotlin.Unit]#kotlin.Function0[kotlin.Unit]#kotlin.Int/PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flip-view.html
+$dokka.location:com.wajahatkarim.flippable/FlipViewState.BACK///PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flip-view-state/-b-a-c-k/index.html
+$dokka.location:com.wajahatkarim.flippable/FlipViewState.FRONT///PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flip-view-state/-f-r-o-n-t/index.html
+$dokka.location:com.wajahatkarim.flippable/FlipViewState///PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flip-view-state/index.html
+com.wajahatkarim.flippable
+
