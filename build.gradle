@@ -1,0 +1,27 @@
+buildscript {
+    ext {
+        agpVersion = '7.0.4'
+        kotlinVersion = '1.6.10'
+        coroutinesVersion = '1.5.2'
+        androidCoreVersion = '1.7.0'
+        composeVersion = '1.1.0'
+        jUnitVersion = '4.13.2'
+        androidJUnitTestVersion = '1.1.3'
+        spotlessVersion = '6.2.2'
+        mavenPublishVersion = '0.18.0'
+    }
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:$agpVersion"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "com.vanniktech:gradle-maven-publish-plugin:$mavenPublishVersion"
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:$kotlinVersion"
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
