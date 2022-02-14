@@ -25,36 +25,36 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 /**
- * An Enum class to keep the state of side of FlipView like [FRONT] or [BACK]
+ * An Enum class to keep the state of side of [Flippable] like [FRONT] or [BACK]
  */
-enum class FlipViewState {
+enum class FlippableState {
     INITIALIZED,
     FRONT,
     BACK
 }
 
 /**
- * An Enum class for animation type of [FlipView]. It has these 4 states:
+ * An Enum class for animation type of [Flippable]. It has these 4 states:
  * [HORIZONTAL_CLOCKWISE], [HORIZONTAL_ANTI_CLOCKWISE], [VERTICAL_CLOCKWISE], and [VERTICAL_ANTI_CLOCKWISE]
  */
 enum class FlipAnimationType {
     /**
-     * Rotates the [FlipView] horizontally in the clockwise direction
+     * Rotates the [Flippable] horizontally in the clockwise direction
      */
     HORIZONTAL_CLOCKWISE,
 
     /**
-     * Rotates the [FlipView] horizontally in the anti-clockwise direction
+     * Rotates the [Flippable] horizontally in the anti-clockwise direction
      */
     HORIZONTAL_ANTI_CLOCKWISE,
 
     /**
-     * Rotates the [FlipView] vertically in the clockwise direction
+     * Rotates the [Flippable] vertically in the clockwise direction
      */
     VERTICAL_CLOCKWISE,
 
     /**
-     * Rotates the [FlipView] vertically in the anti-clockwise direction
+     * Rotates the [Flippable] vertically in the anti-clockwise direction
      */
     VERTICAL_ANTI_CLOCKWISE
 }
@@ -65,7 +65,7 @@ enum class FlipAnimationType {
  *  Example usage:
  *
  *  ```
- *  FlipView(
+ *  Flippable(
  *      frontSide = {
  *          // Composable content
  *      },
@@ -78,13 +78,13 @@ enum class FlipAnimationType {
  *
  *  @param frontSide [Composable] method to draw any view for the front side
  *  @param backSide [Composable] method to draw any view for the back side
- *  @param flipController A [FlipViewController] which lets you control flipping programmatically.
- *  @param modifier The Modifier for this [FlipView]
- *  @param contentAlignment The [FlipView] is contained in a [Box], so this tells the alignment to organize both Front and Back side composable.
+ *  @param flipController A [FlippableController] which lets you control flipping programmatically.
+ *  @param modifier The Modifier for this [Flippable]
+ *  @param contentAlignment The [Flippable] is contained in a [Box], so this tells the alignment to organize both Front and Back side composable.
  *  @param flipDurationMs The duration in Milliseconds for the flipping animation
  *  @param flipOnTouch If true, flipping will be done through clicking the Front/Back sides.
  *  @param flipEnabled Enable/Disable the Flipping animation.
- *  @param autoFlip If true, the [FlipView] will automatically flip back after [autoFlipDurationMs].
+ *  @param autoFlip If true, the [Flippable] will automatically flip back after [autoFlipDurationMs].
  *  @param autoFlipDurationMs The duration in Milliseconds to auto-flip back
  *  @param flipAnimationType The animation type of flipping effect.
  *  @param onFlippedListener The listener which is triggered when flipping animation is finished.
@@ -92,10 +92,10 @@ enum class FlipAnimationType {
  *  @author Wajahat Karim (https://wajahatkarim.com)
  */
 @Composable
-fun FlipView(
+fun Flippable(
     frontSide: @Composable () -> Unit,
     backSide: @Composable () -> Unit,
-    flipController: FlipViewController,
+    flipController: FlippableController,
     modifier: Modifier = Modifier,
     contentAlignment: Alignment = Alignment.Center,
     flipDurationMs: Int = 1000,
@@ -104,12 +104,12 @@ fun FlipView(
     autoFlip: Boolean = false,
     autoFlipDurationMs: Int = 1000,
     flipAnimationType: FlipAnimationType = FlipAnimationType.HORIZONTAL_CLOCKWISE,
-    onFlippedListener: (currentSide: FlipViewState) -> Unit = {_, -> }
+    onFlippedListener: (currentSide: FlippableState) -> Unit = { _, -> }
 ) {
-    var prevViewState by remember { mutableStateOf(FlipViewState.INITIALIZED) }
-    var flipViewState by remember { mutableStateOf(FlipViewState.INITIALIZED) }
-    val transition: Transition<FlipViewState> = updateTransition(
-        targetState = flipViewState,
+    var prevViewState by remember { mutableStateOf(FlippableState.INITIALIZED) }
+    var flippableState by remember { mutableStateOf(FlippableState.INITIALIZED) }
+    val transition: Transition<FlippableState> = updateTransition(
+        targetState = flippableState,
         label = "Flip Transition",
     )
     flipController.setConfig(
@@ -120,15 +120,15 @@ fun FlipView(
         flipController.flipRequests
             .onEach {
                 println("Flip Controller $it")
-                flipViewState = it
+                flippableState = it
             }
             .launchIn(this)
     })
 
     val flipCall: () -> Unit = {
         if (transition.isRunning.not() && flipEnabled) {
-            prevViewState = flipViewState
-            if (flipViewState == FlipViewState.FRONT)
+            prevViewState = flippableState
+            if (flippableState == FlippableState.FRONT)
                 flipController.flipToBack()
             else flipController.flipToFront()
         }
@@ -137,16 +137,16 @@ fun FlipView(
     val scope = rememberCoroutineScope()
 
     LaunchedEffect(key1 = transition.currentState, block = {
-        if (transition.currentState == FlipViewState.INITIALIZED) {
-            prevViewState = FlipViewState.INITIALIZED
-            flipViewState = FlipViewState.FRONT
+        if (transition.currentState == FlippableState.INITIALIZED) {
+            prevViewState = FlippableState.INITIALIZED
+            flippableState = FlippableState.FRONT
             return@LaunchedEffect
         }
 
-        if (prevViewState != FlipViewState.INITIALIZED && transition.currentState == flipViewState) {
-            onFlippedListener.invoke(flipViewState)
+        if (prevViewState != FlippableState.INITIALIZED && transition.currentState == flippableState) {
+            onFlippedListener.invoke(flippableState)
 
-            if (autoFlip && flipViewState != FlipViewState.FRONT) {
+            if (autoFlip && flippableState != FlippableState.FRONT) {
                 scope.launch {
                     delay(autoFlipDurationMs.toLong())
                     flipCall()
@@ -158,7 +158,7 @@ fun FlipView(
     val frontRotation: Float by transition.animateFloat(
         transitionSpec = {
             when {
-                FlipViewState.FRONT isTransitioningTo FlipViewState.BACK -> {
+                FlippableState.FRONT isTransitioningTo FlippableState.BACK -> {
                     keyframes {
                         durationMillis = flipDurationMs
                         0f at 0
@@ -167,7 +167,7 @@ fun FlipView(
                     }
                 }
 
-                FlipViewState.BACK isTransitioningTo FlipViewState.FRONT -> {
+                FlippableState.BACK isTransitioningTo FlippableState.FRONT -> {
                     keyframes {
                         durationMillis = flipDurationMs
                         90f at 0
@@ -182,15 +182,15 @@ fun FlipView(
         label = "Front Rotation"
     ) { state ->
         when(state) {
-            FlipViewState.INITIALIZED, FlipViewState.FRONT -> 0f
-            FlipViewState.BACK -> 180f
+            FlippableState.INITIALIZED, FlippableState.FRONT -> 0f
+            FlippableState.BACK -> 180f
         }
     }
 
     val backRotation: Float by transition.animateFloat(
         transitionSpec = {
             when {
-                FlipViewState.FRONT isTransitioningTo FlipViewState.BACK -> {
+                FlippableState.FRONT isTransitioningTo FlippableState.BACK -> {
                     keyframes {
                         durationMillis = flipDurationMs
                         -90f at 0
@@ -199,7 +199,7 @@ fun FlipView(
                     }
                 }
 
-                FlipViewState.BACK isTransitioningTo FlipViewState.FRONT -> {
+                FlippableState.BACK isTransitioningTo FlippableState.FRONT -> {
                     keyframes {
                         durationMillis = flipDurationMs
                         0f at 0
@@ -214,15 +214,15 @@ fun FlipView(
         label = "Back Rotation"
     ) { state ->
         when(state) {
-            FlipViewState.INITIALIZED, FlipViewState.FRONT -> 180f
-            FlipViewState.BACK -> 0f
+            FlippableState.INITIALIZED, FlippableState.FRONT -> 180f
+            FlippableState.BACK -> 0f
         }
     }
 
     val frontOpacity: Float by transition.animateFloat(
         transitionSpec = {
             when {
-                FlipViewState.FRONT isTransitioningTo FlipViewState.BACK -> {
+                FlippableState.FRONT isTransitioningTo FlippableState.BACK -> {
                     keyframes {
                         durationMillis = flipDurationMs
                         1f at 0
@@ -232,7 +232,7 @@ fun FlipView(
                     }
                 }
 
-                FlipViewState.BACK isTransitioningTo FlipViewState.FRONT -> {
+                FlippableState.BACK isTransitioningTo FlippableState.FRONT -> {
                     keyframes {
                         durationMillis = flipDurationMs
                         0f at 0
@@ -248,15 +248,15 @@ fun FlipView(
         label = "Front Opacity"
     ) { state ->
         when(state) {
-            FlipViewState.INITIALIZED, FlipViewState.FRONT -> 1f
-            FlipViewState.BACK -> 0f
+            FlippableState.INITIALIZED, FlippableState.FRONT -> 1f
+            FlippableState.BACK -> 0f
         }
     }
 
     val backOpacity: Float by transition.animateFloat(
         transitionSpec = {
             when {
-                FlipViewState.FRONT isTransitioningTo FlipViewState.BACK -> {
+                FlippableState.FRONT isTransitioningTo FlippableState.BACK -> {
                     keyframes {
                         durationMillis = flipDurationMs
                         0f at 0
@@ -266,7 +266,7 @@ fun FlipView(
                     }
                 }
 
-                FlipViewState.BACK isTransitioningTo FlipViewState.FRONT -> {
+                FlippableState.BACK isTransitioningTo FlippableState.FRONT -> {
                     keyframes {
                         durationMillis = flipDurationMs
                         1f at 0
@@ -282,8 +282,8 @@ fun FlipView(
         label = "Back Opacity"
     ) { state ->
         when(state) {
-            FlipViewState.INITIALIZED, FlipViewState.FRONT -> 0f
-            FlipViewState.BACK -> 1f
+            FlippableState.INITIALIZED, FlippableState.FRONT -> 0f
+            FlippableState.BACK -> 1f
         }
     }
 

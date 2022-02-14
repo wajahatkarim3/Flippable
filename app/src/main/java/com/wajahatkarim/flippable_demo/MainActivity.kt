@@ -25,7 +25,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.wajahatkarim.flippable.FlipAnimationType
-import com.wajahatkarim.flippable.FlipView
+import com.wajahatkarim.flippable.Flippable
 import com.wajahatkarim.flippable.rememberFlipController
 import com.wajahatkarim.flippable_demo.ui.theme.FlippableDemoTheme
 
@@ -44,12 +44,12 @@ class MainActivity : ComponentActivity() {
 
                     var duration: Int by remember { mutableStateOf(400) }
                     var flipOnTouchEnabled: Boolean by remember { mutableStateOf(true) }
-                    val flipViewController = rememberFlipController()
+                    val flipController = rememberFlipController()
 
-                    FlipView(
+                    Flippable(
                         flipDurationMs = duration,
                         flipOnTouch = flipOnTouchEnabled,
-                        flipController = flipViewController,
+                        flipController = flipController,
                         flipEnabled = true,
                         frontSide = {
                             Image(
@@ -80,7 +80,7 @@ class MainActivity : ComponentActivity() {
                         valueRange = 100f..4000f,
                         onValueChange = {
                             duration = it.toInt()
-                            flipViewController.flip()
+                            flipController.flip()
                         },
                         onValueChangeFinished = {
 
