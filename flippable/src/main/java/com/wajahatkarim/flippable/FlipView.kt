@@ -20,6 +20,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.graphicsLayer
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 enum class FlipViewState {
@@ -52,6 +54,7 @@ enum class FlipViewState {
 fun FlipView(
     frontSide: @Composable () -> Unit,
     backSide: @Composable () -> Unit,
+    flipController: FlipViewController,
     modifier: Modifier = Modifier,
     contentAlignment: Alignment = Alignment.Center,
     flipDurationMs: Int = 1000,
@@ -67,14 +70,25 @@ fun FlipView(
         targetState = flipViewState,
         label = "Flip Transition",
     )
+    flipController.setConfig(
+        flipEnabled = flipEnabled
+    )
+    
+    LaunchedEffect(key1 = flipController, block = {
+        flipController.flipRequests
+            .onEach {
+                println("Flip Controller $it")
+                flipViewState = it
+            }
+            .launchIn(this)
+    })
 
     val flipCall: () -> Unit = {
-        if (transition.isRunning.not() && flipEnabled && flipOnTouch) {
+        if (transition.isRunning.not() && flipEnabled) {
             prevViewState = flipViewState
-            flipViewState =
-                if (flipViewState == FlipViewState.FRONT)
-                    FlipViewState.BACK
-                else FlipViewState.FRONT
+            if (flipViewState == FlipViewState.FRONT)
+                flipController.flipToBack()
+            else flipController.flipToFront()
         }
     }
 
@@ -235,7 +249,9 @@ fun FlipView(
         modifier = modifier
             .clickable(
                 onClick = {
-                    flipCall()
+                    if (flipOnTouch) {
+                        flipCall()
+                    }
                 },
                 interactionSource = remember { MutableInteractionSource() },
                 indication = null
