@@ -1,9 +1,21 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
 $dokka.location:com.wajahatkarim.flippable////PointingToDeclaration/flippable/com.wajahatkarim.flippable/index.html
-$dokka.location:com.wajahatkarim.flippable//FlipView/#kotlin.Function0[kotlin.Unit]#kotlin.Function0[kotlin.Unit]#kotlin.Int/PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flip-view.html
+$dokka.location:com.wajahatkarim.flippable//FlipView/#kotlin.Function0[kotlin.Unit]#kotlin.Function0[kotlin.Unit]#com.wajahatkarim.flippable.FlipViewController#androidx.compose.ui.Modifier#androidx.compose.ui.Alignment#kotlin.Int#kotlin.Boolean#kotlin.Boolean#kotlin.Boolean#kotlin.Int#com.wajahatkarim.flippable.FlipAnimationType#kotlin.Function1[com.wajahatkarim.flippable.FlipViewState,kotlin.Unit]/PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flip-view.html
+$dokka.location:com.wajahatkarim.flippable//rememberFlipController/#/PointingToDeclaration/flippable/com.wajahatkarim.flippable/remember-flip-controller.html
+$dokka.location:com.wajahatkarim.flippable/FlipAnimationType.HORIZONTAL_ANTI_CLOCKWISE///PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flip-animation-type/-h-o-r-i-z-o-n-t-a-l_-a-n-t-i_-c-l-o-c-k-w-i-s-e/index.html
+$dokka.location:com.wajahatkarim.flippable/FlipAnimationType.HORIZONTAL_CLOCKWISE///PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flip-animation-type/-h-o-r-i-z-o-n-t-a-l_-c-l-o-c-k-w-i-s-e/index.html
+$dokka.location:com.wajahatkarim.flippable/FlipAnimationType.VERTICAL_ANTI_CLOCKWISE///PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flip-animation-type/-v-e-r-t-i-c-a-l_-a-n-t-i_-c-l-o-c-k-w-i-s-e/index.html
+$dokka.location:com.wajahatkarim.flippable/FlipAnimationType.VERTICAL_CLOCKWISE///PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flip-animation-type/-v-e-r-t-i-c-a-l_-c-l-o-c-k-w-i-s-e/index.html
+$dokka.location:com.wajahatkarim.flippable/FlipAnimationType///PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flip-animation-type/index.html
+$dokka.location:com.wajahatkarim.flippable/FlipViewController///PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flip-view-controller/index.html
+$dokka.location:com.wajahatkarim.flippable/FlipViewController/flip/#/PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flip-view-controller/flip.html
+$dokka.location:com.wajahatkarim.flippable/FlipViewController/flip/#com.wajahatkarim.flippable.FlipViewState/PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flip-view-controller/flip.html
+$dokka.location:com.wajahatkarim.flippable/FlipViewController/flipToBack/#/PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flip-view-controller/flip-to-back.html
+$dokka.location:com.wajahatkarim.flippable/FlipViewController/flipToFront/#/PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flip-view-controller/flip-to-front.html
 $dokka.location:com.wajahatkarim.flippable/FlipViewState.BACK///PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flip-view-state/-b-a-c-k/index.html
 $dokka.location:com.wajahatkarim.flippable/FlipViewState.FRONT///PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flip-view-state/-f-r-o-n-t/index.html
+$dokka.location:com.wajahatkarim.flippable/FlipViewState.INITIALIZED///PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flip-view-state/-i-n-i-t-i-a-l-i-z-e-d/index.html
 $dokka.location:com.wajahatkarim.flippable/FlipViewState///PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flip-view-state/index.html
 com.wajahatkarim.flippable
 
