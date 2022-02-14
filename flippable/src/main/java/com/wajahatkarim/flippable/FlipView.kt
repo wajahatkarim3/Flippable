@@ -24,16 +24,38 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
+/**
+ * An Enum class to keep the state of side of FlipView like [FRONT] or [BACK]
+ */
 enum class FlipViewState {
     INITIALIZED,
     FRONT,
     BACK
 }
 
+/**
+ * An Enum class for animation type of [FlipView]. It has these 4 states:
+ * [HORIZONTAL_CLOCKWISE], [HORIZONTAL_ANTI_CLOCKWISE], [VERTICAL_CLOCKWISE], and [VERTICAL_ANTI_CLOCKWISE]
+ */
 enum class FlipAnimationType {
+    /**
+     * Rotates the [FlipView] horizontally in the clockwise direction
+     */
     HORIZONTAL_CLOCKWISE,
+
+    /**
+     * Rotates the [FlipView] horizontally in the anti-clockwise direction
+     */
     HORIZONTAL_ANTI_CLOCKWISE,
+
+    /**
+     * Rotates the [FlipView] vertically in the clockwise direction
+     */
     VERTICAL_CLOCKWISE,
+
+    /**
+     * Rotates the [FlipView] vertically in the anti-clockwise direction
+     */
     VERTICAL_ANTI_CLOCKWISE
 }
 
@@ -44,18 +66,30 @@ enum class FlipAnimationType {
  *
  *  ```
  *  FlipView(
- *      flipDurationMs = 400,
  *      frontSide = {
  *          // Composable content
  *      },
  *      backSide = {
  *          // Composable content
- *      })
+ *      }),
+ *      flipController = rememberFlipController(),
+ *      // ... other optional parameters
  *  ```
  *
  *  @param frontSide [Composable] method to draw any view for the front side
  *  @param backSide [Composable] method to draw any view for the back side
+ *  @param flipController A [FlipViewController] which lets you control flipping programmatically.
+ *  @param modifier The Modifier for this [FlipView]
+ *  @param contentAlignment The [FlipView] is contained in a [Box], so this tells the alignment to organize both Front and Back side composable.
  *  @param flipDurationMs The duration in Milliseconds for the flipping animation
+ *  @param flipOnTouch If true, flipping will be done through clicking the Front/Back sides.
+ *  @param flipEnabled Enable/Disable the Flipping animation.
+ *  @param autoFlip If true, the [FlipView] will automatically flip back after [autoFlipDurationMs].
+ *  @param autoFlipDurationMs The duration in Milliseconds to auto-flip back
+ *  @param flipAnimationType The animation type of flipping effect.
+ *  @param onFlippedListener The listener which is triggered when flipping animation is finished.
+ *
+ *  @author Wajahat Karim (https://wajahatkarim.com)
  */
 @Composable
 fun FlipView(
