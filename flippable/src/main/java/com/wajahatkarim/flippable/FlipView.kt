@@ -8,18 +8,22 @@ import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.graphicsLayer
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 enum class FlipViewState {
+    INITIALIZED,
     FRONT,
     BACK
 }
@@ -48,11 +52,52 @@ enum class FlipViewState {
 fun FlipView(
     frontSide: @Composable () -> Unit,
     backSide: @Composable () -> Unit,
-    flipDurationMs: Int = 1000
+    modifier: Modifier = Modifier,
+    contentAlignment: Alignment = Alignment.Center,
+    flipDurationMs: Int = 1000,
+    flipOnTouch: Boolean = true,
+    flipEnabled: Boolean = true,
+    autoFlip: Boolean = false,
+    autoFlipDurationMs: Int = 1000,
+    onFlippedListener: (currentSide: FlipViewState) -> Unit = {_, -> }
 ) {
+    var prevViewState by remember { mutableStateOf(FlipViewState.INITIALIZED) }
+    var flipViewState by remember { mutableStateOf(FlipViewState.INITIALIZED) }
+    val transition: Transition<FlipViewState> = updateTransition(
+        targetState = flipViewState,
+        label = "Flip Transition",
+    )
 
-    var flipViewState by remember { mutableStateOf(FlipViewState.FRONT) }
-    val transition: Transition<FlipViewState> = updateTransition(targetState = flipViewState, "Flip Transition")
+    val flipCall: () -> Unit = {
+        if (transition.isRunning.not() && flipEnabled && flipOnTouch) {
+            prevViewState = flipViewState
+            flipViewState =
+                if (flipViewState == FlipViewState.FRONT)
+                    FlipViewState.BACK
+                else FlipViewState.FRONT
+        }
+    }
+
+    val scope = rememberCoroutineScope()
+
+    LaunchedEffect(key1 = transition.currentState, block = {
+        if (transition.currentState == FlipViewState.INITIALIZED) {
+            prevViewState = FlipViewState.INITIALIZED
+            flipViewState = FlipViewState.FRONT
+            return@LaunchedEffect
+        }
+
+        if (prevViewState != FlipViewState.INITIALIZED && transition.currentState == flipViewState) {
+            onFlippedListener.invoke(flipViewState)
+
+            if (autoFlip && flipViewState != FlipViewState.FRONT) {
+                scope.launch {
+                    delay(autoFlipDurationMs.toLong())
+                    flipCall()
+                }
+            }
+        }
+    })
 
     val frontRotation: Float by transition.animateFloat(
         transitionSpec = {
@@ -81,7 +126,7 @@ fun FlipView(
         label = "Front Rotation"
     ) { state ->
         when(state) {
-            FlipViewState.FRONT -> 0f
+            FlipViewState.INITIALIZED, FlipViewState.FRONT -> 0f
             FlipViewState.BACK -> 180f
         }
     }
@@ -113,7 +158,7 @@ fun FlipView(
         label = "Back Rotation"
     ) { state ->
         when(state) {
-            FlipViewState.FRONT -> 180f
+            FlipViewState.INITIALIZED, FlipViewState.FRONT -> 180f
             FlipViewState.BACK -> 0f
         }
     }
@@ -147,7 +192,7 @@ fun FlipView(
         label = "Front Opacity"
     ) { state ->
         when(state) {
-            FlipViewState.FRONT -> 1f
+            FlipViewState.INITIALIZED, FlipViewState.FRONT -> 1f
             FlipViewState.BACK -> 0f
         }
     }
@@ -181,34 +226,38 @@ fun FlipView(
         label = "Back Opacity"
     ) { state ->
         when(state) {
-            FlipViewState.FRONT -> 0f
+            FlipViewState.INITIALIZED, FlipViewState.FRONT -> 0f
             FlipViewState.BACK -> 1f
         }
     }
 
     Box(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = modifier
             .clickable(
                 onClick = {
-                    flipViewState =
-                        if (flipViewState == FlipViewState.FRONT) FlipViewState.BACK else FlipViewState.FRONT
+                    flipCall()
                 },
                 interactionSource = remember { MutableInteractionSource() },
                 indication = null
             ),
-        contentAlignment = Alignment.Center
+        contentAlignment = contentAlignment
     ) {
 
-        Box(modifier = Modifier.graphicsLayer {
-            rotationY = backRotation
-        }.alpha(backOpacity)) {
+        Box(modifier = Modifier
+            .graphicsLayer {
+                rotationY = backRotation
+            }
+            .alpha(backOpacity)
+        ) {
             backSide()
         }
 
-        Box(modifier = Modifier.graphicsLayer(
-            rotationY = frontRotation
-        ).alpha(frontOpacity)) {
+        Box(modifier = Modifier
+            .graphicsLayer(
+                rotationY = frontRotation
+            )
+            .alpha(frontOpacity)
+        ) {
             frontSide()
         }
     }
