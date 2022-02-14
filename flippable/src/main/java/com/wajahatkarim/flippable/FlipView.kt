@@ -30,6 +30,13 @@ enum class FlipViewState {
     BACK
 }
 
+enum class FlipAnimationType {
+    HORIZONTAL_CLOCKWISE,
+    HORIZONTAL_ANTI_CLOCKWISE,
+    VERTICAL_CLOCKWISE,
+    VERTICAL_ANTI_CLOCKWISE
+}
+
 /**
  *  A composable which creates a card-like flip view for [frontSide] and [backSide] composables.
  *
@@ -62,6 +69,7 @@ fun FlipView(
     flipEnabled: Boolean = true,
     autoFlip: Boolean = false,
     autoFlipDurationMs: Int = 1000,
+    flipAnimationType: FlipAnimationType = FlipAnimationType.HORIZONTAL_CLOCKWISE,
     onFlippedListener: (currentSide: FlipViewState) -> Unit = {_, -> }
 ) {
     var prevViewState by remember { mutableStateOf(FlipViewState.INITIALIZED) }
@@ -261,7 +269,12 @@ fun FlipView(
 
         Box(modifier = Modifier
             .graphicsLayer {
-                rotationY = backRotation
+                when(flipAnimationType) {
+                    FlipAnimationType.HORIZONTAL_CLOCKWISE -> rotationY = backRotation
+                    FlipAnimationType.HORIZONTAL_ANTI_CLOCKWISE -> rotationY = -backRotation
+                    FlipAnimationType.VERTICAL_CLOCKWISE -> rotationX = backRotation
+                    FlipAnimationType.VERTICAL_ANTI_CLOCKWISE -> rotationX = -backRotation
+                }
             }
             .alpha(backOpacity)
         ) {
@@ -269,9 +282,14 @@ fun FlipView(
         }
 
         Box(modifier = Modifier
-            .graphicsLayer(
-                rotationY = frontRotation
-            )
+            .graphicsLayer {
+                when (flipAnimationType) {
+                    FlipAnimationType.HORIZONTAL_CLOCKWISE -> rotationY = frontRotation
+                    FlipAnimationType.HORIZONTAL_ANTI_CLOCKWISE -> rotationY = -frontRotation
+                    FlipAnimationType.VERTICAL_CLOCKWISE -> rotationX = frontRotation
+                    FlipAnimationType.VERTICAL_ANTI_CLOCKWISE -> rotationX = -frontRotation
+                }
+            }
             .alpha(frontOpacity)
         ) {
             frontSide()

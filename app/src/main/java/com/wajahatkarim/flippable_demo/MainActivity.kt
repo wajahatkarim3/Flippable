@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.wajahatkarim.flippable.FlipAnimationType
 import com.wajahatkarim.flippable.FlipView
 import com.wajahatkarim.flippable.rememberFlipController
 import com.wajahatkarim.flippable_demo.ui.theme.FlippableDemoTheme
@@ -70,7 +71,8 @@ class MainActivity : ComponentActivity() {
                             println(currentSide)
                         },
                         autoFlip = false,
-                        autoFlipDurationMs = 1000
+                        autoFlipDurationMs = 1000,
+                        flipAnimationType = FlipAnimationType.VERTICAL_ANTI_CLOCKWISE
                     )
 
                     Slider(
