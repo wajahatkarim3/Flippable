@@ -141,11 +141,28 @@ Flippable(
 ```
 
 I encourage you to play around with the [sample app](https://github.com/wajahatkarim3/Flippable/blob/main/app/src/main/java/com/wajahatkarim/flippable_demo/MainActivity.kt) to get a better look and feel. It showcases advanced usage with customized parameters.
-
+        
 <br/>
         
 ## 📄 API Documentation
 Visit the [API documentation](https://wajahatkarim3.github.io/Flippable) of this library to get more information in detail.
+
+<br/>
+        
+## ⚙️ Animation Types
+
+### Horizontal Clockwise
+![Kapture 2022-02-15 at 23 20 11](https://user-images.githubusercontent.com/8867121/154124561-2f6d6d2d-1f7a-4d85-92cd-c91f54b6f245.gif)
+
+### Horizontal Anti-Clockwise
+![Kapture 2022-02-15 at 23 24 05](https://user-images.githubusercontent.com/8867121/154125061-f40fed57-d1d3-42ee-94cf-f0597ce12fee.gif)
+
+### Vertical Clockwise
+![Kapture 2022-02-15 at 23 26 00](https://user-images.githubusercontent.com/8867121/154125376-496d2577-1c65-49bf-a1e1-0ba0aefcd0b0.gif)
+
+
+### Vertical Anti-Clockwise
+![Kapture 2022-02-15 at 23 26 33](https://user-images.githubusercontent.com/8867121/154125464-f89f3196-466a-4be9-9874-cf78ba4729ac.gif)
         
 <br/>
         
