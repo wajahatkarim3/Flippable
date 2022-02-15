@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.zIndex
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -86,6 +87,7 @@ enum class FlipAnimationType {
  *  @param flipEnabled Enable/Disable the Flipping animation.
  *  @param autoFlip If true, the [Flippable] will automatically flip back after [autoFlipDurationMs].
  *  @param autoFlipDurationMs The duration in Milliseconds to auto-flip back
+ *  @param cameraDistance The [GraphicsLayerScope.cameraDistance] for the flip animation. Sets the distance along the Z axis (orthogonal to the X/Y plane on which layers are drawn) from the camera to this layer.
  *  @param flipAnimationType The animation type of flipping effect.
  *  @param onFlippedListener The listener which is triggered when flipping animation is finished.
  *
@@ -98,11 +100,12 @@ fun Flippable(
     flipController: FlippableController,
     modifier: Modifier = Modifier,
     contentAlignment: Alignment = Alignment.Center,
-    flipDurationMs: Int = 1000,
+    flipDurationMs: Int = 400,
     flipOnTouch: Boolean = true,
     flipEnabled: Boolean = true,
     autoFlip: Boolean = false,
     autoFlipDurationMs: Int = 1000,
+    cameraDistance: Float = 30.0F,
     flipAnimationType: FlipAnimationType = FlipAnimationType.HORIZONTAL_CLOCKWISE,
     onFlippedListener: (currentSide: FlippableState) -> Unit = { _, -> }
 ) {
@@ -303,7 +306,8 @@ fun Flippable(
 
         Box(modifier = Modifier
             .graphicsLayer {
-                when(flipAnimationType) {
+                this.cameraDistance = cameraDistance
+                when (flipAnimationType) {
                     FlipAnimationType.HORIZONTAL_CLOCKWISE -> rotationY = backRotation
                     FlipAnimationType.HORIZONTAL_ANTI_CLOCKWISE -> rotationY = -backRotation
                     FlipAnimationType.VERTICAL_CLOCKWISE -> rotationX = backRotation
@@ -311,12 +315,14 @@ fun Flippable(
                 }
             }
             .alpha(backOpacity)
+            .zIndex(1F - backOpacity)
         ) {
             backSide()
         }
 
         Box(modifier = Modifier
             .graphicsLayer {
+                this.cameraDistance = cameraDistance
                 when (flipAnimationType) {
                     FlipAnimationType.HORIZONTAL_CLOCKWISE -> rotationY = frontRotation
                     FlipAnimationType.HORIZONTAL_ANTI_CLOCKWISE -> rotationY = -frontRotation
@@ -325,6 +331,7 @@ fun Flippable(
                 }
             }
             .alpha(frontOpacity)
+            .zIndex(1F - frontRotation)
         ) {
             frontSide()
         }
