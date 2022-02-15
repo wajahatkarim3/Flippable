@@ -1,7 +1,7 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
 $dokka.location:com.wajahatkarim.flippable////PointingToDeclaration/flippable/com.wajahatkarim.flippable/index.html
-$dokka.location:com.wajahatkarim.flippable//Flippable/#kotlin.Function0[kotlin.Unit]#kotlin.Function0[kotlin.Unit]#com.wajahatkarim.flippable.FlippableController#androidx.compose.ui.Modifier#androidx.compose.ui.Alignment#kotlin.Int#kotlin.Boolean#kotlin.Boolean#kotlin.Boolean#kotlin.Int#com.wajahatkarim.flippable.FlipAnimationType#kotlin.Function1[com.wajahatkarim.flippable.FlippableState,kotlin.Unit]/PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flippable.html
+$dokka.location:com.wajahatkarim.flippable//Flippable/#kotlin.Function0[kotlin.Unit]#kotlin.Function0[kotlin.Unit]#com.wajahatkarim.flippable.FlippableController#androidx.compose.ui.Modifier#androidx.compose.ui.Alignment#kotlin.Int#kotlin.Boolean#kotlin.Boolean#kotlin.Boolean#kotlin.Int#kotlin.Float#com.wajahatkarim.flippable.FlipAnimationType#kotlin.Function1[com.wajahatkarim.flippable.FlippableState,kotlin.Unit]/PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flippable.html
 $dokka.location:com.wajahatkarim.flippable//rememberFlipController/#/PointingToDeclaration/flippable/com.wajahatkarim.flippable/remember-flip-controller.html
 $dokka.location:com.wajahatkarim.flippable/FlipAnimationType.HORIZONTAL_ANTI_CLOCKWISE///PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flip-animation-type/-h-o-r-i-z-o-n-t-a-l_-a-n-t-i_-c-l-o-c-k-w-i-s-e/index.html
 $dokka.location:com.wajahatkarim.flippable/FlipAnimationType.HORIZONTAL_CLOCKWISE///PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flip-animation-type/-h-o-r-i-z-o-n-t-a-l_-c-l-o-c-k-w-i-s-e/index.html
