@@ -1,5 +1,7 @@
 package com.wajahatkarim.flippable
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 
@@ -55,5 +57,15 @@ class FlippableController {
         flipEnabled: Boolean = true,
     ) {
         _flipEnabled = flipEnabled
+    }
+}
+
+/**
+ * Creates an instance of [FlippableController] and remembers it for recomposition.
+ */
+@Composable
+fun rememberFlipController(): FlippableController {
+    return remember {
+        FlippableController()
     }
 }
