@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.wajahatkarim.flippable_demo"
-        minSdk 23
+        minSdk 21
         targetSdk 31
         versionCode 1
         versionName "1.0"

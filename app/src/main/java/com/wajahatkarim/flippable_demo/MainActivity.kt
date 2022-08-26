@@ -23,7 +23,6 @@ import androidx.compose.material.Checkbox
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.RadioButton
-import androidx.compose.material.RadioButtonDefaults
 import androidx.compose.material.Slider
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -38,12 +37,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.wajahatkarim.flippable.FlipAnimationType
 import com.wajahatkarim.flippable.Flippable
-import com.wajahatkarim.flippable.rememberFlipController
+import com.wajahatkarim.flippable.FlippableController
 import com.wajahatkarim.flippable_demo.ui.theme.FlippableDemoTheme
 
 class MainActivity : ComponentActivity() {
@@ -69,8 +67,12 @@ class MainActivity : ComponentActivity() {
                         var autoFlipEnabled: Boolean by remember { mutableStateOf(false) }
                         var selectedAnimType: FlipAnimationType by remember { mutableStateOf(FlipAnimationType.VERTICAL_ANTI_CLOCKWISE) }
 
-                        val flipController = rememberFlipController()
-                        val flipController2 = rememberFlipController()
+                        val flipController = remember(key1 = "1") {
+                            FlippableController()
+                        }
+                        val flipController2 = remember(key1 = "2") {
+                            FlippableController()
+                        }
 
                         Flippable(
                             frontSide = {
