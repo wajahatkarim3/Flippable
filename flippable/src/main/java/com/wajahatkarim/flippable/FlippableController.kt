@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.asSharedFlow
  *
  * @author Wajahat Karim (https://wajahatkarim.com)
  */
-class FlippableController internal constructor() {
+class FlippableController {
 
     private val _flipRequests = MutableSharedFlow<FlippableState>(extraBufferCapacity = 1)
     internal val flipRequests = _flipRequests.asSharedFlow()
