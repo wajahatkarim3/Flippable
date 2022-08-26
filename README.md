@@ -73,7 +73,15 @@ Flippable(
     // Other optional parameters
 )
 ```
-    
+
+The `FlippableController` allows you to programatically flip the view from any event or button click or any method call etc. There's a method `rememberFlipController()` to get an instance of `FlippableController`. If you want to use any key for the `remember`, you can do so by directly creating `FlippableController` yourself like the code below:
+
+```kotlin
+val flipController = remember { FlippableController() }
+
+val flipController1 = remember(key = "2") { FlippableController() }
+```
+
 <br/>
     
 ## 🎨 Customization Parameters
