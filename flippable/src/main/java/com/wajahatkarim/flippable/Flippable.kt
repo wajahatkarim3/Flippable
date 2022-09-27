@@ -123,6 +123,7 @@ fun Flippable(
         flipController.flipRequests
             .onEach {
                 println("Flip Controller $it")
+                prevViewState = flippableState
                 flippableState = it
             }
             .launchIn(this)
