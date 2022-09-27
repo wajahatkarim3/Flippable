@@ -122,6 +122,7 @@ fun Flippable(
     LaunchedEffect(key1 = flipController, block = {
         flipController.flipRequests
             .onEach {
+                prevViewState = flippableState
                 flippableState = it
             }
             .launchIn(this)
