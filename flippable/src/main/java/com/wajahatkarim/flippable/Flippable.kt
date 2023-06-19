@@ -293,10 +293,9 @@ fun Flippable(
     Box(
         modifier = modifier
             .clickable(
+                enabled = flipOnTouch,
                 onClick = {
-                    if (flipOnTouch) {
-                        flipCall()
-                    }
+                    flipCall()
                 },
                 interactionSource = remember { MutableInteractionSource() },
                 indication = null
