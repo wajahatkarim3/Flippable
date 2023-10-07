@@ -1,6 +1,7 @@
 package com.wajahatkarim.flippable_demo
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -43,6 +44,7 @@ import com.wajahatkarim.flippable.FlipAnimationType
 import com.wajahatkarim.flippable.Flippable
 import com.wajahatkarim.flippable.FlippableController
 import com.wajahatkarim.flippable_demo.ui.theme.FlippableDemoTheme
+import androidx.compose.ui.platform.LocalContext
 
 class MainActivity : ComponentActivity() {
 
@@ -52,10 +54,14 @@ class MainActivity : ComponentActivity() {
         setContent {
             FlippableDemoTheme {
                 // A surface container using the 'background' color from the theme
+
+                val context = LocalContext.current
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
+
+
                     Column(
                         modifier = Modifier.fillMaxSize(),
                         verticalArrangement = Arrangement.Top
@@ -87,7 +93,12 @@ class MainActivity : ComponentActivity() {
                             flipEnabled = flipEnabled,
                             autoFlip = autoFlipEnabled,
                             autoFlipDurationMs = 2000,
-                            flipAnimationType = selectedAnimType
+                            flipAnimationType = selectedAnimType,
+                            onFlippedListener = { currentSide ->
+                                println(currentSide)
+                                Toast.makeText(context, "Flipped to $currentSide", Toast.LENGTH_SHORT).show()
+
+                            }
                         )
 
                         Flippable(
@@ -119,6 +130,8 @@ class MainActivity : ComponentActivity() {
                             contentAlignment = Alignment.TopCenter,
                             onFlippedListener = { currentSide ->
                                 println(currentSide)
+                                Toast.makeText(context, "Flipped to $currentSide", Toast.LENGTH_SHORT).show()
+
                             },
                             autoFlip = autoFlipEnabled,
                             autoFlipDurationMs = 2000,
