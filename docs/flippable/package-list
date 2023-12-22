@@ -3,19 +3,26 @@ $dokka.linkExtension:html
 $dokka.location:com.wajahatkarim.flippable////PointingToDeclaration/flippable/com.wajahatkarim.flippable/index.html
 $dokka.location:com.wajahatkarim.flippable//Flippable/#kotlin.Function0[kotlin.Unit]#kotlin.Function0[kotlin.Unit]#com.wajahatkarim.flippable.FlippableController#androidx.compose.ui.Modifier#androidx.compose.ui.Alignment#kotlin.Int#kotlin.Boolean#kotlin.Boolean#kotlin.Boolean#kotlin.Int#kotlin.Float#com.wajahatkarim.flippable.FlipAnimationType#kotlin.Function1[com.wajahatkarim.flippable.FlippableState,kotlin.Unit]/PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flippable.html
 $dokka.location:com.wajahatkarim.flippable//rememberFlipController/#/PointingToDeclaration/flippable/com.wajahatkarim.flippable/remember-flip-controller.html
-$dokka.location:com.wajahatkarim.flippable/FlipAnimationType.HORIZONTAL_ANTI_CLOCKWISE///PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flip-animation-type/-h-o-r-i-z-o-n-t-a-l_-a-n-t-i_-c-l-o-c-k-w-i-s-e/index.html
-$dokka.location:com.wajahatkarim.flippable/FlipAnimationType.HORIZONTAL_CLOCKWISE///PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flip-animation-type/-h-o-r-i-z-o-n-t-a-l_-c-l-o-c-k-w-i-s-e/index.html
-$dokka.location:com.wajahatkarim.flippable/FlipAnimationType.VERTICAL_ANTI_CLOCKWISE///PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flip-animation-type/-v-e-r-t-i-c-a-l_-a-n-t-i_-c-l-o-c-k-w-i-s-e/index.html
-$dokka.location:com.wajahatkarim.flippable/FlipAnimationType.VERTICAL_CLOCKWISE///PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flip-animation-type/-v-e-r-t-i-c-a-l_-c-l-o-c-k-w-i-s-e/index.html
+$dokka.location:com.wajahatkarim.flippable/FlipAnimationType.HORIZONTAL_ANTI_CLOCKWISE///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}flippable/com.wajahatkarim.flippable/-flip-animation-type/-h-o-r-i-z-o-n-t-a-l_-a-n-t-i_-c-l-o-c-k-w-i-s-e/index.html
+$dokka.location:com.wajahatkarim.flippable/FlipAnimationType.HORIZONTAL_CLOCKWISE///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}flippable/com.wajahatkarim.flippable/-flip-animation-type/-h-o-r-i-z-o-n-t-a-l_-c-l-o-c-k-w-i-s-e/index.html
+$dokka.location:com.wajahatkarim.flippable/FlipAnimationType.VERTICAL_ANTI_CLOCKWISE///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}flippable/com.wajahatkarim.flippable/-flip-animation-type/-v-e-r-t-i-c-a-l_-a-n-t-i_-c-l-o-c-k-w-i-s-e/index.html
+$dokka.location:com.wajahatkarim.flippable/FlipAnimationType.VERTICAL_CLOCKWISE///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}flippable/com.wajahatkarim.flippable/-flip-animation-type/-v-e-r-t-i-c-a-l_-c-l-o-c-k-w-i-s-e/index.html
 $dokka.location:com.wajahatkarim.flippable/FlipAnimationType///PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flip-animation-type/index.html
+$dokka.location:com.wajahatkarim.flippable/FlipAnimationType/entries/#/PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flip-animation-type/entries.html
+$dokka.location:com.wajahatkarim.flippable/FlipAnimationType/valueOf/#kotlin.String/PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flip-animation-type/value-of.html
+$dokka.location:com.wajahatkarim.flippable/FlipAnimationType/values/#/PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flip-animation-type/values.html
 $dokka.location:com.wajahatkarim.flippable/FlippableController///PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flippable-controller/index.html
+$dokka.location:com.wajahatkarim.flippable/FlippableController/FlippableController/#/PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flippable-controller/-flippable-controller.html
 $dokka.location:com.wajahatkarim.flippable/FlippableController/flip/#/PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flippable-controller/flip.html
 $dokka.location:com.wajahatkarim.flippable/FlippableController/flip/#com.wajahatkarim.flippable.FlippableState/PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flippable-controller/flip.html
 $dokka.location:com.wajahatkarim.flippable/FlippableController/flipToBack/#/PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flippable-controller/flip-to-back.html
 $dokka.location:com.wajahatkarim.flippable/FlippableController/flipToFront/#/PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flippable-controller/flip-to-front.html
-$dokka.location:com.wajahatkarim.flippable/FlippableState.BACK///PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flippable-state/-b-a-c-k/index.html
-$dokka.location:com.wajahatkarim.flippable/FlippableState.FRONT///PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flippable-state/-f-r-o-n-t/index.html
-$dokka.location:com.wajahatkarim.flippable/FlippableState.INITIALIZED///PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flippable-state/-i-n-i-t-i-a-l-i-z-e-d/index.html
+$dokka.location:com.wajahatkarim.flippable/FlippableState.BACK///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}flippable/com.wajahatkarim.flippable/-flippable-state/-b-a-c-k/index.html
+$dokka.location:com.wajahatkarim.flippable/FlippableState.FRONT///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}flippable/com.wajahatkarim.flippable/-flippable-state/-f-r-o-n-t/index.html
+$dokka.location:com.wajahatkarim.flippable/FlippableState.INITIALIZED///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}flippable/com.wajahatkarim.flippable/-flippable-state/-i-n-i-t-i-a-l-i-z-e-d/index.html
 $dokka.location:com.wajahatkarim.flippable/FlippableState///PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flippable-state/index.html
+$dokka.location:com.wajahatkarim.flippable/FlippableState/entries/#/PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flippable-state/entries.html
+$dokka.location:com.wajahatkarim.flippable/FlippableState/valueOf/#kotlin.String/PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flippable-state/value-of.html
+$dokka.location:com.wajahatkarim.flippable/FlippableState/values/#/PointingToDeclaration/flippable/com.wajahatkarim.flippable/-flippable-state/values.html
 com.wajahatkarim.flippable
 
