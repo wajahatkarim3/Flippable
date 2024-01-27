@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace 'com.wajahatkarim.flippable'
-    compileSdk 31
+    compileSdk 34
 
     defaultConfig {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -18,6 +18,13 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
     }
     buildFeatures {
         buildConfig false
