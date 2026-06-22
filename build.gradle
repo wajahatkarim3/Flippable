@@ -1,16 +1,14 @@
 buildscript {
     ext {
-        agpVersion = '7.4.2'
-        kotlinVersion = '1.9.20'
+        agpVersion = '8.2.2'
+        kotlinVersion = '1.9.22'
         dokkaKotlinVersion = '1.9.10'
-        coroutinesVersion = '1.5.4'
-        androidCoreVersion = '1.7.0'
-        composeVersion = '1.5.4'
+        androidCoreVersion = '1.12.0'
+        composeVersion = '1.6.0'
         jUnitVersion = '4.13.2'
-        composeKotlinCompilerExtensionVersion = '1.5.4'
-        androidJUnitTestVersion = '1.1.3'
-        spotlessVersion = '6.2.2'
-        mavenPublishVersion = '0.18.0'
+        composeKotlinCompilerExtensionVersion = '1.5.8'
+        androidJUnitTestVersion = '1.1.5'
+        mavenPublishVersion = '0.27.0'
     }
     repositories {
         google()
