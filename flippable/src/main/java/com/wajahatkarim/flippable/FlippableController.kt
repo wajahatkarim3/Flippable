@@ -19,6 +19,14 @@ class FlippableController {
     private var _flipEnabled: Boolean = true
 
     /**
+     * Updates the internally tracked current side without triggering a flip animation.
+     * Used by [Flippable] to sync the controller with [Flippable.initialSide] on initialization.
+     */
+    internal fun setCurrentSide(side: FlippableState) {
+        _currentSide = side
+    }
+
+    /**
      * Flips the view to the [FlippableState.FRONT] side
      */
     fun flipToFront() {

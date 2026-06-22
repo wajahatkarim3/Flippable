@@ -72,7 +72,7 @@ enum class FlipAnimationType {
  *      },
  *      backSide = {
  *          // Composable content
- *      }),
+ *      },
  *      flipController = rememberFlipController(),
  *      // ... other optional parameters
  *  ```
@@ -81,6 +81,10 @@ enum class FlipAnimationType {
  *  @param backSide [Composable] method to draw any view for the back side
  *  @param flipController A [FlippableController] which lets you control flipping programmatically.
  *  @param modifier The Modifier for this [Flippable]
+ *  @param initialSide The initial side to display when the [Flippable] first appears.
+ *  Defaults to [FlippableState.FRONT]. Pass [FlippableState.BACK] to start with the back side
+ *  visible — useful when restoring flip state across list items or navigation.
+ *  Must not be [FlippableState.INITIALIZED].
  *  @param contentAlignment The [Flippable] is contained in a [Box], so this tells the alignment to organize both Front and Back side composable.
  *  @param flipDurationMs The duration in Milliseconds for the flipping animation
  *  @param flipOnTouch If true, flipping will be done through clicking the Front/Back sides.
@@ -88,7 +92,9 @@ enum class FlipAnimationType {
  *  @param autoFlip If true, the [Flippable] will automatically flip back after [autoFlipDurationMs].
  *  @param autoFlipDurationMs The duration in Milliseconds to auto-flip back
  *  @param cameraDistance The [GraphicsLayerScope.cameraDistance] for the flip animation. Sets the distance along the Z axis (orthogonal to the X/Y plane on which layers are drawn) from the camera to this layer.
- *  @param flipAnimationType The animation type of flipping effect.
+ *  @param flipAnimationType The animation direction of the flip effect. Use [FlipAnimationType.HORIZONTAL_CLOCKWISE]
+ *  or [FlipAnimationType.HORIZONTAL_ANTI_CLOCKWISE] for left/right flips, and
+ *  [FlipAnimationType.VERTICAL_CLOCKWISE] or [FlipAnimationType.VERTICAL_ANTI_CLOCKWISE] for up/down flips.
  *  @param onFlippedListener The listener which is triggered when flipping animation is finished.
  *
  *  @author Wajahat Karim (https://wajahatkarim.com)
@@ -99,6 +105,7 @@ fun Flippable(
     backSide: @Composable () -> Unit,
     flipController: FlippableController,
     modifier: Modifier = Modifier,
+    initialSide: FlippableState = FlippableState.FRONT,
     contentAlignment: Alignment = Alignment.Center,
     flipDurationMs: Int = 400,
     flipOnTouch: Boolean = true,
@@ -107,8 +114,12 @@ fun Flippable(
     autoFlipDurationMs: Int = 1000,
     cameraDistance: Float = 30.0F,
     flipAnimationType: FlipAnimationType = FlipAnimationType.HORIZONTAL_CLOCKWISE,
-    onFlippedListener: (currentSide: FlippableState) -> Unit = { _, -> }
+    onFlippedListener: (currentSide: FlippableState) -> Unit = { _ -> }
 ) {
+    require(initialSide != FlippableState.INITIALIZED) {
+        "initialSide must be FRONT or BACK, not INITIALIZED."
+    }
+
     var prevViewState by remember { mutableStateOf(FlippableState.INITIALIZED) }
     var flippableState by remember { mutableStateOf(FlippableState.INITIALIZED) }
     val transition: Transition<FlippableState> = updateTransition(
@@ -129,7 +140,7 @@ fun Flippable(
     })
 
     val flipCall: () -> Unit = {
-        if (transition.isRunning.not() && flipEnabled) {
+        if (transition.isRunning.not() && flipEnabled && flippableState != FlippableState.INITIALIZED) {
             prevViewState = flippableState
             if (flippableState == FlippableState.FRONT)
                 flipController.flipToBack()
@@ -142,7 +153,8 @@ fun Flippable(
     LaunchedEffect(key1 = transition.currentState, block = {
         if (transition.currentState == FlippableState.INITIALIZED) {
             prevViewState = FlippableState.INITIALIZED
-            flippableState = FlippableState.FRONT
+            flippableState = initialSide
+            flipController.setCurrentSide(initialSide)
             return@LaunchedEffect
         }
 
@@ -184,7 +196,7 @@ fun Flippable(
         },
         label = "Front Rotation"
     ) { state ->
-        when(state) {
+        when (state) {
             FlippableState.INITIALIZED, FlippableState.FRONT -> 0f
             FlippableState.BACK -> 180f
         }
@@ -216,7 +228,7 @@ fun Flippable(
         },
         label = "Back Rotation"
     ) { state ->
-        when(state) {
+        when (state) {
             FlippableState.INITIALIZED, FlippableState.FRONT -> 180f
             FlippableState.BACK -> 0f
         }
@@ -250,7 +262,7 @@ fun Flippable(
         },
         label = "Front Opacity"
     ) { state ->
-        when(state) {
+        when (state) {
             FlippableState.INITIALIZED, FlippableState.FRONT -> 1f
             FlippableState.BACK -> 0f
         }
@@ -284,7 +296,7 @@ fun Flippable(
         },
         label = "Back Opacity"
     ) { state ->
-        when(state) {
+        when (state) {
             FlippableState.INITIALIZED, FlippableState.FRONT -> 0f
             FlippableState.BACK -> 1f
         }
@@ -330,7 +342,7 @@ fun Flippable(
                 }
             }
             .alpha(frontOpacity)
-            .zIndex(1F - frontRotation)
+            .zIndex(1F - frontOpacity)
         ) {
             frontSide()
         }
